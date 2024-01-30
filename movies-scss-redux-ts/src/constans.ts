@@ -1,0 +1,25 @@
+export const SCREEN_DESCTOP: number = 1000;
+export const SCREEN_TABLET: number = 800;
+export const SCREEN_MOBILE: number = 500;
+export const STARTING_ITEMS_DESCTOP: number = 16;
+export const STARTING_ITEMS_TABLET: number = 12;
+export const STARTING_ITEMS_MOBILE: number = 8;
+export const STARTING_ITEMS_MINIMUM: number = 5;
+export const ADDITIONAL_ITEMS_DESCTOP: number = 4;
+export const ADDITIONAL_ITEMS_TABLET: number = 3;
+export const ADDITIONAL_ITEMS_MOBILE: number = 2;
+export const ADDITIONAL_ITEMS_MINIMUM: number = 2;
+export const ONE_ADDITIONAL_ELEMENT: number = 1;
+export const MINUTES_PER_HOUR: number = 60;
+export const SHORT_FILMS_DURATION: number = 40;
+export const AUTHORISATION_ERROR: number = 401;
+export const BAD_REQUEST_ERROR: number = 400;
+export const INTERNAL_SERVER_ERROR: number = 500;
+export const CONFLICTING_REQUEST_ERROR: number = 409;
+export const NAME_RULE: string = 'Имя может содержать латиницу, кириллицу, пробел и дефис. Длина от 2 до 45 символов.';
+export const EMAIL_RULE: string = 'E-mail должен быть в формате "mail@domain.ru"';
+export const MOVIE_DOWNLOAD_ERROR: string = 'Сбой! Фильмы не загружены с сервера. Попробуйте позже.';
+export const TOKEN_VERIFICATION_ERROR: string = 'Сбой авторизации! Попробуйте позже.';
+export const FAVORITE_DELETE_ERROR: string = 'Сбой удаления из избранных! Попробуйте позже.';
+export const ERROR_ADDING_FAVORITES: string = 'Сбой добавления в избранные! Попробуйте позже.';
+
