@@ -5,7 +5,7 @@ import {
   BAD_REQUEST_ERROR,
 } from '../constans';
 
-export default function handleError(err, page) {
+export default function handleError(err: number, page: string): string {
   console.log(err);
   if (err === CONFLICTING_REQUEST_ERROR) {
     return 'Пользователь с таким E-mail уже существует.';
