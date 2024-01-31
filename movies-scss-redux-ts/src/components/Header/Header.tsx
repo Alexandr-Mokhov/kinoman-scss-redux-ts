@@ -22,7 +22,7 @@ export default function Header() {
     <header className={`header ${!isMain && "header_light"}`}>
       {isMain || isMovies || isSavedMovies || isProfile ?
         <header className="header__container">
-          <Link className="header__logo" to="/" />
+          <Link className="header__logo" to="/" aria-label="На главную страницу" />
           {
             loggedIn ? <Navigation /> :
               <div className="header__links-authorization">
