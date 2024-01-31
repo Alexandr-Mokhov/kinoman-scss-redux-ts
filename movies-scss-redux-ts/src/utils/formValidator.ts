@@ -7,8 +7,6 @@ export function useFormWithValidation() {
   const [isRegEx, setIsRegEx] = useState({});
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.validity.typeMismatch);
-    
     const target = event.target;
     const name = target.name;
     const value = target.value;
