@@ -8,7 +8,7 @@ export default function Promo() {
           <p className="promo__subtitle">Листайте ниже, чтобы узнать больше про этот проект и его создателя.</p>
           <nav className="promo__nav-tab">
             <ul className="promo__nav-tab-list">
-              <li><a className="promo__button" href="#about-project">Узнать больше</a></li>
+              <li><a className="promo__button" href="#about-project" aria-label="Узнать больше о проекте">Узнать больше</a></li>
             </ul>
           </nav>
         </div>

@@ -47,7 +47,7 @@ export default function Login() {
   return (
     <main className="auth">
       <section className="auth__container">
-        <Link className="auth__link" to="/" aria-label="На главную страницу"><div className="auth__logo" /></Link>
+        <Link className="auth__link" to="/"><div className="auth__logo" /></Link>
         <h1 className="auth__title">Рады видеть!</h1>
         <Form
           name={"login"}

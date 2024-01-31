@@ -67,7 +67,7 @@ export default function MoviesCard({ movie }) {
 
   return (
     <div className="movies-card">
-      <a href={movie.trailerLink} target="_blank" rel="noreferrer" aria-label={`Трейлер фильма ${movie.nameRU}`}>
+      <a href={movie.trailerLink} target="_blank" rel="noreferrer">
         <img
           className="movies-card__image"
           src={movie.image.url ? `https://api.nomoreparties.co/${movie.image.url}` : movie.image}
@@ -80,7 +80,6 @@ export default function MoviesCard({ movie }) {
           className={`movies-card__favorites ${isSavedMovies && 'movies-card__favorites_delete'}
             ${isLiked && 'movies-card__favorites_active'}`}
           type="button"
-          aria-label={`${isLiked || isSavedMovies ? `удалить из избранного ${movie.nameRU}` :  `добавить в избранное ${movie.nameRU}`}`}
           onClick={handleLikeClick}
           disabled={likeDisabled}
         />

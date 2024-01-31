@@ -22,7 +22,6 @@ export default function AboutMe() {
               href="https://github.com/Alexandr-Mokhov"
               target="_blank"
               rel="noreferrer"
-              aria-label="На Github Александра Мохова"
             >
               Github
             </a>

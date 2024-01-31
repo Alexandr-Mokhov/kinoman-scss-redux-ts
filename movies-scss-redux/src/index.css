@@ -1415,18 +1415,15 @@ select:-webkit-autofill:focus {
   left: 0;
   opacity: 0;
   pointer-events: none;
+  display: flex;
   justify-content: center;
   align-items: center;
   transition: 0.5s all ease;
-  visibility: hidden;
-  display: none;
 }
 
 .info-tooltip_opened {
   pointer-events: all;
   opacity: 1;
-  visibility: visible;
-  display: flex;
 }
 
 .info-tooltip__container {

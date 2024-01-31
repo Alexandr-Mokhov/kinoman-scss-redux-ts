@@ -11,9 +11,9 @@ export default function InfoTooltip() {
   }
 
   return (
-    <div className={`info-tooltip ${infoTooltipOpen ? 'info-tooltip_opened' : ''}`} aria-label={`Уведомление ${infoTooltipMessage}`} >
+    <div className={`info-tooltip ${infoTooltipOpen ? 'info-tooltip_opened' : ''}`} >
       <div className="info-tooltip__container">
-        <button className="info-tooltip__close" type="button" onClick={closeInfoTooltip} aria-label="Закрыть уведомление" />
+        <button className="info-tooltip__close" type="button" onClick={closeInfoTooltip} />
         <div className="info-tooltip__image_type_err" />
         <h3 className="info-tooltip__title">
           {infoTooltipMessage}

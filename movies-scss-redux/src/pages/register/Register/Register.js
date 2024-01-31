@@ -66,7 +66,7 @@ export default function Register() {
   return (
     <main className="auth">
       <section className="auth__container">
-        <Link className="auth__link" to="/" aria-label="На главную страницу"><div className="auth__logo" /></Link>
+        <Link className="auth__link" to="/"><div className="auth__logo" /></Link>
         <h1 className="auth__title">Добро пожаловать!</h1>
         <Form
           name={"register"}
