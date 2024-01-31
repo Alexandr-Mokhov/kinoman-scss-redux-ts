@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+type TypeInitialState = {
+  errorText: string
+}
+
+const initialState: TypeInitialState = {
   errorText: '', 
 }
 
