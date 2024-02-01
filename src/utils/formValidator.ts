@@ -6,8 +6,8 @@ export function useFormWithValidation() {
   const [isValid, setIsValid] = useState(false);
   const [isRegEx, setIsRegEx] = useState({});
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const target = event.target;
+  const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    const target = evt.target;
     const name = target.name;
     const value = target.value;
     setValues({...values, [name]: value});

@@ -1,20 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SearchForm from '../../../components/SearchForm/SearchForm';
 import MoviesCardList from '../../../components/MoviesCardList/MoviesCardList';
 import filterMovies from '../../../utils/filterMovies';
 import { setNotFoundMovies } from '../../../store/features/notMoviesSlice';
 import { SHORT_FILMS_DURATION } from '../../../constans';
+import type { RootState } from '../../../types';
+import type { MoviesListType } from '../../../types';
 
 export default function SavedMovies() {
   const [value, setValue] = useState('');
   const [isValid, setIsValid] = useState(true);
-  const [foundSavedMovies, setFoundSavedMovies] = useState([]);
+  const [foundSavedMovies, setFoundSavedMovies] = useState<MoviesListType[] | []>([]);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [checkedShortSaved, setCheckedShortSaved] = useState(false);
   const dispatch = useDispatch();
-  const savedFilms = useSelector(state => state.favorite.savedFilms);
+  const savedFilms = useSelector((state: RootState) => state.favorite.savedFilms);
 
   useEffect(() => {
     if (foundSavedMovies[0]) {
@@ -30,13 +32,15 @@ export default function SavedMovies() {
     dispatch(setNotFoundMovies(false));
   }, [foundSavedMovies, checkedShortSaved])
 
-  function handleChange(evt) {
+  function handleChange(evt: ChangeEvent<HTMLInputElement>): void {
+    console.log(savedFilms);
+    
     setValue(evt.target.value);
     if (evt.target.value === '') {
       setIsValid(false);
       setButtonDisabled(true);
       if (checkedShortSaved) {
-        setFoundSavedMovies(savedFilms.filter(movie => movie.duration < SHORT_FILMS_DURATION));
+        setFoundSavedMovies(savedFilms.filter((movie: MoviesListType) => movie.duration < SHORT_FILMS_DURATION));
       } else {
         setFoundSavedMovies(savedFilms);
       }
@@ -46,7 +50,7 @@ export default function SavedMovies() {
     }
   }
 
-  function handleVisibledFilms(checked) {
+  function handleVisibledFilms(checked: boolean): void {
     if (checked) {
       setFoundSavedMovies(filterMovies(savedFilms, value, true));
     } else {
@@ -59,7 +63,7 @@ export default function SavedMovies() {
     handleVisibledFilms(!checkedShortSaved);
   }
 
-  function handleSubmit(evt) {
+  function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     handleVisibledFilms(checkedShortSaved);
   }
@@ -74,9 +78,15 @@ export default function SavedMovies() {
         buttonDisabled={buttonDisabled}
         checkedShortSaved={checkedShortSaved}
         handleChecked={handleChecked}
+        checkedShort
       />
       <MoviesCardList
         foundSavedMovies={foundSavedMovies}
+        foundMovies
+        errorFoundMovies
+        startItems
+        shortFilms
+        checkedShort
       />
     </main>
   )

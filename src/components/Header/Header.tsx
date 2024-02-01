@@ -1,7 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Navigation from '../Navigation/Navigation';
-import type { RootState } from '../../store';
+import type { RootState } from '../../types';
+
 type TypeLocation = {
   hash: string;
   key: string;

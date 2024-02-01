@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-// import { useDispatch } from 'react-redux';
 import Header from './components/Header/Header';
 import Main from './pages/main/Main/Main';
 import Movies from './pages/movies/Movies/Movies';
@@ -22,7 +21,8 @@ import { setCurrentUser } from './store/features/userSlice';
 import { setNotFoundMovies } from './store/features/notMoviesSlice';
 import { setSavedFilms } from './store/features/filmsSlice';
 import { MOVIE_DOWNLOAD_ERROR, TOKEN_VERIFICATION_ERROR } from './constans';
-import type { RootState } from './store/index';
+import type { RootState } from './types';
+import type { MoviesListType } from './types';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ export default function App() {
   
   const loggedIn = useSelector((state: RootState) => state.logged.loggedIn);
 
-  // const currentUser = useSelector(state => state.user);
+  const currentUser = useSelector((state: RootState) => state.user);
   const [isTokenChecked, setIsTokenChecked] = useState(false);
 
   useEffect(() => {
@@ -41,8 +41,8 @@ export default function App() {
   useEffect(() => {
     if (loggedIn) {
       getSavedMovies()
-        .then((res) => {
-          // dispatch(setSavedFilms(res.filter(movie => movie.owner === currentUser.ownerId)));
+        .then((res: MoviesListType[]) => {
+          dispatch(setSavedFilms(res.filter(movie => movie.owner === currentUser.ownerId)));
         })
         .catch((err) => {
           console.log(err);

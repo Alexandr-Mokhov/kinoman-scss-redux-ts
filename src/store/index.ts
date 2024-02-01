@@ -19,14 +19,4 @@ const store = configureStore({
   }
 });
 
-export type RootState = {
-  error: { errorText: string }
-  favorite: { savedFilms: [] }
-  loading: { isLoading: boolean }
-  logged: { loggedIn: boolean }
-  notMovies: { notFoundMovies: boolean }
-  tooltip: { infoTooltipOpen: boolean, infoTooltipMessage: string }
-  user: { name: string, email: string, ownerId: string }
-};
-
 export default store;
