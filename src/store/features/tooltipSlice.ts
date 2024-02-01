@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+type TypeInitialState = {
+  infoTooltipOpen: boolean;
+  infoTooltipMessage: string;
+}
+
+const initialState: TypeInitialState = {
   infoTooltipOpen: false,
   infoTooltipMessage: '',
 }

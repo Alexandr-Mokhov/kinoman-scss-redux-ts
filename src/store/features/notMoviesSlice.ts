@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+type TypeInitialState = {
+  notFoundMovies: boolean;
+}
+
+const initialState: TypeInitialState = {
   notFoundMovies: false,
 }
 

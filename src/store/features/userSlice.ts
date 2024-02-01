@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+type TypeInitialState = {
+  name: string;
+  email: string;
+  ownerId: string;
+}
+
+const initialState: TypeInitialState = {
   name: '',
   email: '',
   ownerId: '',
