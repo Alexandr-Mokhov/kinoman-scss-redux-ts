@@ -32,9 +32,7 @@ export default function SavedMovies() {
     dispatch(setNotFoundMovies(false));
   }, [foundSavedMovies, checkedShortSaved])
 
-  function handleChange(evt: ChangeEvent<HTMLInputElement>): void {
-    console.log(savedFilms);
-    
+  function handleChange(evt: ChangeEvent<HTMLInputElement>): void {    
     setValue(evt.target.value);
     if (evt.target.value === '') {
       setIsValid(false);
