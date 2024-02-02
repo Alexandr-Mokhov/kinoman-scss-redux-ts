@@ -1,19 +1,19 @@
 import { useState, useEffect } from 'react';
 
 export const useResize = () => {
-  const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState(window.innerWidth);  
 
-  function debounce(func, timeout = 300){
-    let timer;
-    return (...args) => {
+  function debounce(func: Function, timeout = 300){
+    let timer: ReturnType<typeof setTimeout>;
+    return () => {
       clearTimeout(timer);
-      timer = setTimeout(() => { func.apply(this, args); }, timeout);
+      timer = setTimeout(() => func.apply(window), timeout);
     };
   }
 
   useEffect(() => {
-    const handleResize = (event) => {
-      setWidth(event.target.innerWidth);
+    const handleResize = (): void => {
+      setWidth(window.innerWidth); 
     };
     window.addEventListener('resize', debounce(handleResize, 100));
     return () => {
