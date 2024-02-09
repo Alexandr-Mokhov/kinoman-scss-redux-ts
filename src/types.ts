@@ -5,7 +5,7 @@ export type MoviesListType = {
   director: string
   duration: number
   id?: number
-  image: {} | string
+  image: { url?: string | undefined }
   nameEN: string
   nameRU: string
   trailerLink: string
@@ -26,3 +26,22 @@ export type RootState = {
   tooltip: { infoTooltipOpen: boolean, infoTooltipMessage: string }
   user: { name: string, email: string, ownerId: string }
 };
+
+export type OptionType = {
+  method: string;
+  headers: { 'Content-Type': string };
+  body?: BodyInit | null | undefined;
+}
+
+export type UserDataType = {
+  name?: string;
+  email?: string;
+  password?: string;
+}
+
+export type ResponseUserDataType = {
+  name: string;
+  email: string;
+  _id: string;
+  status: string | never;
+}

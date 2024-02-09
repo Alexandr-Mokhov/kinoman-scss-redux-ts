@@ -1,10 +1,5 @@
 import checkResponse from './checkResponse';
-
-type OptionType = {
-  method: string;
-  headers: {'Content-Type': string};
-  body?: BodyInit | null | undefined;
-}
+import type { OptionType } from '../types';
 
 function request(option: OptionType) {
   return fetch(`https://api.nomoreparties.co/beatfilm-movies`, option).then(checkResponse);

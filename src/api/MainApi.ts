@@ -1,4 +1,5 @@
 import checkResponse from './checkResponse';
+import type { MoviesListType, OptionType, UserDataType } from '../types';
 
 function setHeaders() {
   const token = localStorage.getItem('token');
@@ -8,11 +9,11 @@ function setHeaders() {
   };
 }
 
-function request(url, option) {
+function request(url: string, option: OptionType) {  
   return fetch(`https://api.diploma.mokhov.nomoredomains.rocks${url}`, option).then(checkResponse);
 }
 
-export const registerUser = ({ name, email, password }) => {
+export const registerUser = ({ name, email, password }: UserDataType) => {
   return request('/signup', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -20,7 +21,7 @@ export const registerUser = ({ name, email, password }) => {
   })
 }
 
-export const authorizeUser = ({ email, password }) => {
+export const authorizeUser = ({ email, password }: UserDataType) => {
   return request('/signin', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -28,7 +29,7 @@ export const authorizeUser = ({ email, password }) => {
   })
 }
 
-export const updateUserInfo = ({ name, email }) => {
+export const updateUserInfo = ({ name, email }: UserDataType) => {
   return request('/users/me', {
     method: 'PATCH',
     headers: setHeaders(),
@@ -43,7 +44,7 @@ export const checkToken = () => {
   });
 }
 
-export function addStatusFavorite(movie) {
+export function addStatusFavorite(movie: MoviesListType) {
   return request(`/movies`, {
     method: 'POST',
     headers: setHeaders(),
@@ -63,7 +64,7 @@ export function addStatusFavorite(movie) {
   });
 }
 
-export function deleteStatusFavorite(movie) {
+export function deleteStatusFavorite(movie: MoviesListType) {
   return request(`/movies/${movie._id}`, {
     method: 'DELETE',
     headers: setHeaders(),
