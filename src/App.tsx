@@ -21,8 +21,8 @@ import { setCurrentUser } from './store/features/userSlice';
 import { setNotFoundMovies } from './store/features/notMoviesSlice';
 import { setSavedFilms } from './store/features/filmsSlice';
 import { MOVIE_DOWNLOAD_ERROR, TOKEN_VERIFICATION_ERROR } from './constans';
-import type { RootState } from './types';
-import type { MoviesListType } from './types';
+import type { RootState } from '../types';
+import type { MoviesListType } from '../types';
 
 export default function App() {
   const dispatch = useDispatch();

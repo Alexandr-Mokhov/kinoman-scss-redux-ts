@@ -6,8 +6,8 @@ import MoviesCardList from '../../../components/MoviesCardList/MoviesCardList';
 import filterMovies from '../../../utils/filterMovies';
 import { setNotFoundMovies } from '../../../store/features/notMoviesSlice';
 import { SHORT_FILMS_DURATION } from '../../../constans';
-import type { RootState } from '../../../types';
-import type { MoviesListType } from '../../../types';
+import type { RootState } from '../../../../types';
+import type { MoviesListType } from '../../../../types';
 
 export default function SavedMovies() {
   const [value, setValue] = useState('');

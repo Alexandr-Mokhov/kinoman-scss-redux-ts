@@ -1,5 +1,5 @@
 import checkResponse from './checkResponse';
-import type { MoviesListType, OptionType, UserDataType } from '../types';
+import type { MoviesListType, OptionType, UserDataType } from '../../types';
 
 function setHeaders() {
   const token = localStorage.getItem('token');
