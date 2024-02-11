@@ -1,5 +1,15 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import type { RootState } from '../../../types';
+import { FormEventHandler, ReactNode } from 'react';
+
+type FormPropsTypes = {
+  children: ReactNode,
+  name: string,
+  buttonText: string,
+  onSubmit: FormEventHandler<HTMLFormElement>,
+  isDisabledButton: boolean,
+}
 
 export default function Form({
   children,
@@ -7,11 +17,11 @@ export default function Form({
   buttonText,
   onSubmit,
   isDisabledButton
-}) {
+}: FormPropsTypes) {
   const isRegister = name === 'register';
-  const isLoading = useSelector(state => state.loading.isLoading);
-  const errorText = useSelector(state => state.error.errorText);
-  
+  const isLoading = useSelector((state: RootState) => state.loading.isLoading);
+  const errorText = useSelector((state: RootState) => state.error.errorText);
+    
   return (
     <form className="form" onSubmit={onSubmit} name={name} noValidate>
       <div className="form__container">
