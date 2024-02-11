@@ -17,6 +17,8 @@ export type MoviesListType = {
 	movieId?: number,
 }
 
+export type MoviesSavedListType = MoviesListType & { image: string }
+
 export type RootState = {
   error: { errorText: string },
   favorite: { savedFilms: [] },

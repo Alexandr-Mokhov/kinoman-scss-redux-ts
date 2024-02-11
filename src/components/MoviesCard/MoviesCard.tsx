@@ -5,27 +5,34 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addStatusFavorite, deleteStatusFavorite } from '../../api/MainApi';
 import { setInfoTooltip } from '../../store/features/tooltipSlice';
 import { setSavedFilms } from '../../store/features/filmsSlice';
+import type { RootState, MoviesSavedListType } from '../../../types';
 import {
   MINUTES_PER_HOUR,
   FAVORITE_DELETE_ERROR,
   ERROR_ADDING_FAVORITES,
 } from '../../constans';
 
-export default function MoviesCard({ movie }) {
+type MovieType = {
+  movie: MoviesSavedListType
+}
+
+export default function MoviesCard({ movie }: MovieType) {  
   const dispatch = useDispatch();
-  const savedFilms = useSelector(state => state.favorite.savedFilms);
+  const savedFilms = useSelector((state: RootState) => state.favorite.savedFilms);
   const { pathname } = useLocation();
   const [isLiked, setIsLiked] = useState(false);
   const [likeDisabled, setLikeDisabled] = useState(false);
-  const isSavedMovies = pathname === '/saved-movies';
+  const isSavedMovies = pathname === '/saved-movies';  
 
   useEffect(() => {
-    if (savedFilms[0]) {
+    console.log(savedFilms);
+    
+    if (savedFilms) {
       savedFilms.map((item) => checkValues(item));
     }
   }, [savedFilms, movie])
 
-  function checkValues(item) {
+  function checkValues(item: MoviesSavedListType) {
     if (item.movieId === movie.id) {
       setIsLiked(true);
       movie._id = item._id;
@@ -38,7 +45,7 @@ export default function MoviesCard({ movie }) {
       deleteStatusFavorite(movie)
         .then(() => {
           setIsLiked(false);
-          dispatch(setSavedFilms(savedFilms.filter(item => item._id !== movie._id)));
+          dispatch(setSavedFilms(savedFilms.filter((item: MoviesSavedListType) => item._id !== movie._id)));
           setLikeDisabled(false);
         })
         .catch((err) => {
@@ -59,18 +66,18 @@ export default function MoviesCard({ movie }) {
     }
   }
 
-  function getTimeFromMins(mins) {
+  function getTimeFromMins(mins: number) {
     const hours = Math.trunc(mins / MINUTES_PER_HOUR);
     const minutes = mins % MINUTES_PER_HOUR;
     return hours + 'ч ' + minutes + 'м';
-  };
+  };  
 
   return (
     <div className="movies-card">
       <a href={movie.trailerLink} target="_blank" rel="noreferrer" aria-label={`Трейлер фильма ${movie.nameRU}`}>
         <img
           className="movies-card__image"
-          src={movie.image.url ? `https://api.nomoreparties.co/${movie.image.url}` : movie.image}
+          src={movie.image}
           alt={movie.nameRU}
         />
       </a>
