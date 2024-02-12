@@ -12,7 +12,7 @@ import type { MoviesListType } from '../../../../types';
 export default function SavedMovies() {
   const [value, setValue] = useState('');
   const [isValid, setIsValid] = useState(true);
-  const [foundSavedMovies, setFoundSavedMovies] = useState<MoviesListType[] | []>([]);
+  const [foundSavedMovies, setFoundSavedMovies] = useState<MoviesListType[]>([]);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [checkedShortSaved, setCheckedShortSaved] = useState(false);
   const dispatch = useDispatch();
@@ -80,11 +80,8 @@ export default function SavedMovies() {
       />
       <MoviesCardList
         foundSavedMovies={foundSavedMovies}
-        foundMovies
-        errorFoundMovies
-        startItems
-        shortFilms
-        checkedShort
+        foundMovies={[]}
+        shortFilms={[]}
       />
     </main>
   )

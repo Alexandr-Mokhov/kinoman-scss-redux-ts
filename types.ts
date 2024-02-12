@@ -4,8 +4,8 @@ export type MoviesListType = {
   description: string,
   director: string,
   duration: number,
-  id?: number,
-  image: { url?: string | undefined },
+  id: number,
+  image: { url: string } & string,
   nameEN: string,
   nameRU: string,
   trailerLink: string,
@@ -14,10 +14,8 @@ export type MoviesListType = {
   _id?: string,
 	owner?: string,
 	thumbnail?: string,
-	movieId?: number,
+	movieId: number,
 }
-
-export type MoviesSavedListType = MoviesListType & { image: string }
 
 export type RootState = {
   error: { errorText: string },

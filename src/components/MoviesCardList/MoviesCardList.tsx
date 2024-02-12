@@ -1,6 +1,16 @@
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import type { RootState, MoviesListType } from '../../../types';
+
+type MoviesCardListType = {
+  foundMovies: [],
+  errorFoundMovies?: boolean,
+  startItems?: number,
+  shortFilms: [],
+  checkedShort?: boolean,
+  foundSavedMovies: MoviesListType[],
+}
 
 export default function MoviesCardList({
   foundMovies,
@@ -9,20 +19,20 @@ export default function MoviesCardList({
   shortFilms,
   checkedShort,
   foundSavedMovies,
-}) {
+}: MoviesCardListType) {
   const { pathname } = useLocation();
-  const notFoundMovies = useSelector(state => state.notMovies.notFoundMovies);
-  const savedFilms = useSelector(state => state.favorite.savedFilms);
+  const notFoundMovies = useSelector((state: RootState) => state.notMovies.notFoundMovies);
+  const savedFilms = useSelector((state: RootState) => state.favorite.savedFilms);
 
-  function createMovieCard(movie, id) {
+  function createMovieCard(movie: MoviesListType, id: number) {
     return <MoviesCard
       movie={movie}
       key={id}
     />
   }
 
-  function createMovieList(list) {
-    return list.slice(0, startItems).map((movieItem) => createMovieCard(movieItem, movieItem.id));
+  function createMovieList(list: []) {    
+    return list.slice(0, startItems).map((movieItem: MoviesListType) => createMovieCard(movieItem, movieItem.id));
   }
 
   const movieFoundItems = () => {
@@ -30,8 +40,8 @@ export default function MoviesCardList({
   }
 
   const movieSavedItems = () => {
-    if (savedFilms[0]) {
-      return foundSavedMovies.map((movieItem) => createMovieCard(movieItem, movieItem.movieId));
+    if (savedFilms) {
+      return foundSavedMovies.map((movieItem: MoviesListType) => createMovieCard(movieItem, movieItem.movieId));
     }
   }
 

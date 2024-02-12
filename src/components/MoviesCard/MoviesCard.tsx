@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addStatusFavorite, deleteStatusFavorite } from '../../api/MainApi';
 import { setInfoTooltip } from '../../store/features/tooltipSlice';
 import { setSavedFilms } from '../../store/features/filmsSlice';
-import type { RootState, MoviesSavedListType } from '../../../types';
+import type { RootState, MoviesListType } from '../../../types';
 import {
   MINUTES_PER_HOUR,
   FAVORITE_DELETE_ERROR,
@@ -13,7 +13,7 @@ import {
 } from '../../constans';
 
 type MovieType = {
-  movie: MoviesSavedListType
+  movie: MoviesListType
 }
 
 export default function MoviesCard({ movie }: MovieType) {  
@@ -24,15 +24,13 @@ export default function MoviesCard({ movie }: MovieType) {
   const [likeDisabled, setLikeDisabled] = useState(false);
   const isSavedMovies = pathname === '/saved-movies';  
 
-  useEffect(() => {
-    console.log(savedFilms);
-    
+  useEffect(() => {    
     if (savedFilms) {
       savedFilms.map((item) => checkValues(item));
     }
   }, [savedFilms, movie])
 
-  function checkValues(item: MoviesSavedListType) {
+  function checkValues(item: MoviesListType) {
     if (item.movieId === movie.id) {
       setIsLiked(true);
       movie._id = item._id;
@@ -45,7 +43,7 @@ export default function MoviesCard({ movie }: MovieType) {
       deleteStatusFavorite(movie)
         .then(() => {
           setIsLiked(false);
-          dispatch(setSavedFilms(savedFilms.filter((item: MoviesSavedListType) => item._id !== movie._id)));
+          dispatch(setSavedFilms(savedFilms.filter((item: MoviesListType) => item._id !== movie._id)));
           setLikeDisabled(false);
         })
         .catch((err) => {
@@ -70,14 +68,14 @@ export default function MoviesCard({ movie }: MovieType) {
     const hours = Math.trunc(mins / MINUTES_PER_HOUR);
     const minutes = mins % MINUTES_PER_HOUR;
     return hours + 'ч ' + minutes + 'м';
-  };  
+  };
 
   return (
     <div className="movies-card">
       <a href={movie.trailerLink} target="_blank" rel="noreferrer" aria-label={`Трейлер фильма ${movie.nameRU}`}>
         <img
           className="movies-card__image"
-          src={movie.image}
+          src={movie.image.url ? `https://api.nomoreparties.co/${movie.image.url}` : movie.image}
           alt={movie.nameRU}
         />
       </a>
