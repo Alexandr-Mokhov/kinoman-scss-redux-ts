@@ -8,8 +8,8 @@ export default function Navigation() {
 
   useEffect(() => {
     if (!navMenu) return;
-    function handleClickOverlay(evt) {
-      if (evt.target.className.indexOf('navigation__overlay') === 0) {
+    function handleClickOverlay(evt: MouseEvent) {
+      if ((evt.target as HTMLElement).className.indexOf('navigation__overlay') === 0) {
         setNavMenu(!navMenu);
       }
     }
