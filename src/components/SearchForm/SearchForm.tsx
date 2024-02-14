@@ -1,4 +1,16 @@
 import { useLocation } from 'react-router-dom';
+import { FormEventHandler, ChangeEventHandler } from 'react';
+
+type PropsType = {
+  value: string,
+  handleSubmit: FormEventHandler<HTMLFormElement>,
+  handleChange: ChangeEventHandler<HTMLInputElement>,
+  isValid: boolean,
+  buttonDisabled: boolean,
+  checkedShort: boolean,
+  handleChecked: ChangeEventHandler<HTMLInputElement>,
+  checkedShortSaved: boolean,
+}
 
 export default function SearchForm({
   value,
@@ -9,7 +21,7 @@ export default function SearchForm({
   checkedShort,
   handleChecked,
   checkedShortSaved,
-}) {
+}: PropsType) {
   const { pathname } = useLocation();
 
   return (
