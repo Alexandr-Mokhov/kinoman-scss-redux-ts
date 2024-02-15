@@ -1,8 +1,9 @@
 import { useCallback, useState, ChangeEvent } from 'react';
+import { ValuesErrorsType } from '../../types';
 
 export function useFormWithValidation() {
-  const [values, setValues] = useState({});
-  const [errors, setErrors] = useState({});
+  const [values, setValues] = useState<ValuesErrorsType>({email: '', password: ''});
+  const [errors, setErrors] = useState<ValuesErrorsType>({email: '', password: ''});
   const [isValid, setIsValid] = useState(false);
   const [isRegEx, setIsRegEx] = useState({});
 
@@ -18,8 +19,8 @@ export function useFormWithValidation() {
 
   const resetForm = useCallback(
     (newValues = {}, newErrors = {}, newIsValid = false, newIsRegEx = false) => {
-      setValues(newValues);
-      setErrors(newErrors);
+      setValues(newValues as ValuesErrorsType);
+      setErrors(newErrors as ValuesErrorsType);
       setIsValid(newIsValid);
       setIsRegEx(newIsRegEx);
     },

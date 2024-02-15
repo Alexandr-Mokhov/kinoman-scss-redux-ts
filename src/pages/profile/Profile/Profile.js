@@ -11,7 +11,7 @@ import {
   EMAIL_RULE,
 } from '../../../constans';
 
-export default function Profile({ onSignOut }) {
+export default function Profile({ onSignOut }): FC {
   const dispatch = useDispatch();
   const isLoading = useSelector(state => state.loading.isLoading);
   const currentUser = useSelector(state => state.user);

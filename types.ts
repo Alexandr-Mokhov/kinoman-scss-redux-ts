@@ -45,3 +45,8 @@ export type ResponseUserDataType = {
   _id: string,
   status: string | never,
 }
+
+export type ValuesErrorsType = {
+  email: string,
+  password: string,
+}
