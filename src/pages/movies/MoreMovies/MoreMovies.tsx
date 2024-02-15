@@ -1,4 +1,6 @@
-export default function MoreMovies({ handleClickMore }) {
+import { MouseEventHandler } from "react";
+
+export default function MoreMovies({ handleClickMore }: { handleClickMore: MouseEventHandler<HTMLButtonElement> }) {
   return (
     <section className="more-movies">
       <div className="more-movies__container">
