@@ -1,25 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react';
+import { FormEvent, MouseEventHandler, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormWithValidation } from '../../../utils/formValidator';
 import { updateUserInfo } from '../../../api/MainApi';
 import handleError from '../../../utils/handleError';
 import { setIsLoading } from '../../../store/features/loadingSlice';
 import { setCurrentUser } from '../../../store/features/userSlice';
-import {
-  NAME_RULE,
-  EMAIL_RULE,
-} from '../../../constans';
+import { NAME_RULE, EMAIL_RULE } from '../../../constans';
+import { RootState } from '../../../../types';
 
-export default function Profile({ onSignOut }): FC {
+export default function Profile({ onSignOut }: { onSignOut: MouseEventHandler}) {
   const dispatch = useDispatch();
-  const isLoading = useSelector(state => state.loading.isLoading);
-  const currentUser = useSelector(state => state.user);
+  const isLoading = useSelector((state: RootState) => state.loading.isLoading);
+  const currentUser = useSelector((state: RootState) => state.user);
   const [profileEdit, setProfileEdit] = useState(false);
   const [isMatches, setIsMatches] = useState(true);
   const { values, handleChange, errors, isValid, isRegEx } = useFormWithValidation();
   const [notificationText, setNotificationText] = useState('');
-
   function changeProfileEdit() {
     setProfileEdit(!profileEdit);
     setNotificationText('');
@@ -39,7 +36,7 @@ export default function Profile({ onSignOut }): FC {
     }
   }, [values])
 
-  function handleSubmit(evt) {
+  function handleSubmit(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     dispatch(setIsLoading(true));
     setNotificationText('');
@@ -84,8 +81,8 @@ export default function Profile({ onSignOut }): FC {
                 type="text"
                 placeholder="Ваше имя"
                 required
-                minLength="2"
-                maxLength="45"
+                minLength={2}
+                maxLength={45}
                 value={profileEdit ? values['name'] : currentUser.name || ''}
                 onChange={handleChange}
                 autoComplete="off"
