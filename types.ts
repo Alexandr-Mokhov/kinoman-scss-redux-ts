@@ -47,6 +47,13 @@ export type ResponseUserDataType = {
 }
 
 export type ValuesErrorsType = {
+  name?: string,
   email: string,
   password: string,
+}
+
+export type RegExType = {
+  name?: string,
+  email: boolean, 
+  password: boolean,
 }

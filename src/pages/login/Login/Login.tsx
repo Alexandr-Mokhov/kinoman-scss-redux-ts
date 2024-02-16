@@ -9,7 +9,7 @@ import { EMAIL_RULE } from '../../../constans';
 import { setLoggedIn } from '../../../store/features/loggedSlice';
 import { setIsLoading } from '../../../store/features/loadingSlice';
 import { setErrorText } from '../../../store/features/errorSlice';
-import { RootState, ValuesErrorsType } from '../../../../types';
+import { RootState, ValuesErrorsType, RegExType } from '../../../../types';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export default function Login() {
     isValid: boolean,
     resetForm: (newValues?: {}, newErrors?: {}, newIsValid?: boolean, newIsRegEx?: boolean) => void,
     setIsValid: React.Dispatch<React.SetStateAction<boolean>>,
-    isRegEx: any,
+    isRegEx: RegExType,
 } = useFormWithValidation();
 const dispatch = useDispatch();
 const isLoading = useSelector((state: RootState) => state.loading.isLoading);

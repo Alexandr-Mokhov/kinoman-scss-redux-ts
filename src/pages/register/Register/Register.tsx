@@ -1,3 +1,4 @@
+import { ChangeEvent, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Form from '../../../components/Form/Form';
@@ -8,18 +9,24 @@ import { setLoggedIn } from '../../../store/features/loggedSlice';
 import { setIsLoading } from '../../../store/features/loadingSlice';
 import { setCurrentUser } from '../../../store/features/userSlice';
 import { setErrorText } from '../../../store/features/errorSlice';
-import {
-  NAME_RULE,
-  EMAIL_RULE,
-} from '../../../constans';
+import { NAME_RULE, EMAIL_RULE } from '../../../constans';
+import { RootState, ValuesErrorsType, RegExType } from '../../../../types';
 
 export default function Register() {
   const navigate = useNavigate();
-  const { values, handleChange, errors, isValid, resetForm, isRegEx } = useFormWithValidation();
+  const { values, handleChange, errors, isValid, resetForm, isRegEx }: {
+    values: ValuesErrorsType,
+    handleChange: (evt: ChangeEvent<HTMLInputElement>) => void;
+    errors: ValuesErrorsType,
+    isValid: boolean,
+    resetForm: (newValues?: {}, newErrors?: {}, newIsValid?: boolean, newIsRegEx?: boolean) => void,
+    setIsValid: React.Dispatch<React.SetStateAction<boolean>>,
+    isRegEx: RegExType,
+} = useFormWithValidation();
   const dispatch = useDispatch();
-  const isLoading = useSelector(state => state.loading.isLoading);
+  const isLoading = useSelector((state: RootState) => state.loading.isLoading);
 
-  function handleSubmit(evt) {
+  function handleSubmit(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     dispatch(setIsLoading(true));
     dispatch(setErrorText(''));
@@ -82,8 +89,8 @@ export default function Register() {
             type="text"
             placeholder="Ваше имя"
             required
-            minLength="2"
-            maxLength="45"
+            minLength={2}
+            maxLength={45}
             value={values['name'] || ''}
             onChange={handleChange}
             autoComplete="off"
@@ -116,7 +123,7 @@ export default function Register() {
             type="password"
             placeholder="Пароль"
             required
-            minLength="4"
+            minLength={4}
             value={values['password'] || ''}
             onChange={handleChange}
             autoComplete="off"
