@@ -9,7 +9,7 @@ type MoviesCardListType = {
   startItems?: number,
   shortFilms: [],
   checkedShort?: boolean,
-  foundSavedMovies: MoviesListType[],
+  foundSavedMovies?: MoviesListType[],
 }
 
 export default function MoviesCardList({
@@ -41,7 +41,7 @@ export default function MoviesCardList({
 
   const movieSavedItems = () => {
     if (savedFilms) {
-      return foundSavedMovies.map((movieItem: MoviesListType) => createMovieCard(movieItem, movieItem.movieId));
+      return (foundSavedMovies as MoviesListType[]).map((movieItem: MoviesListType) => createMovieCard(movieItem, movieItem.movieId));
     }
   }
 

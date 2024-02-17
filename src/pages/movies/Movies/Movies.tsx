@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import SearchForm from '../../../components/SearchForm/SearchForm';
 import MoviesCardList from '../../../components/MoviesCardList/MoviesCardList';
@@ -28,7 +28,7 @@ export default function Movies() {
   const [value, setValue] = useState('');
   const [isValid, setIsValid] = useState(true);
   const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [shortFilms, setShortFilms] = useState([]);
+  const [shortFilms, setShortFilms] = useState<[]>([]);
   const [preloaderEnabled, setPreloaderEnabled] = useState(false);
   const [errorFoundMovies, setErrorFoundMovies] = useState(false);
   const [buttonMore, setButtonMore] = useState(false);
@@ -36,7 +36,7 @@ export default function Movies() {
   const [addedItems, setAddedItems] = useState(2);
   const [checkedShort, setCheckedShort] = useState(false);
   const [movies, setMovies] = useState([]);
-  const [foundMovies, setFoundMovies] = useState([]);
+  const [foundMovies, setFoundMovies] = useState<[]>([]);
   const windowWidth = useResize();
   const dispatch = useDispatch();
 
@@ -47,10 +47,10 @@ export default function Movies() {
 
   useEffect(() => {
     if (localStorage.movieSearchText) {
-      setValue(localStorage.getItem('movieSearchText'));
-      setCheckedShort(JSON.parse(localStorage.getItem('checkedShort')));
-      setShortFilms(JSON.parse(localStorage.getItem('shortFilms')));
-      setFoundMovies(JSON.parse(localStorage.getItem('foundMovies')));
+      setValue(localStorage.getItem('movieSearchText') as string);
+      setCheckedShort(JSON.parse(localStorage.getItem('checkedShort') as string));
+      setShortFilms(JSON.parse(localStorage.getItem('shortFilms') as string));
+      setFoundMovies(JSON.parse(localStorage.getItem('foundMovies') as string));
     }
   }, [])
 
@@ -63,7 +63,7 @@ export default function Movies() {
     handleShowButtonMore(startItems);
   }, [foundMovies, shortFilms])
 
-  function handleChange(evt) {
+  function handleChange(evt: ChangeEvent<HTMLInputElement>) {
     setValue(evt.target.value);
     if (evt.target.value === '') {
       setIsValid(false);
@@ -90,12 +90,12 @@ export default function Movies() {
     }
   }
 
-  function showButtonMore(listFilms, visibleFilms) {
+  function showButtonMore(listFilms: [], visibleFilms: number) {
     listFilms.length >= visibleFilms + ONE_ADDITIONAL_ELEMENT ?
       setButtonMore(true) : setButtonMore(false);
   }
 
-  function handleShowButtonMore(visibleFilms) {
+  function handleShowButtonMore(visibleFilms: number) {
     checkedShort ?
       showButtonMore(shortFilms, visibleFilms) :
       showButtonMore(foundMovies, visibleFilms);
@@ -114,14 +114,14 @@ export default function Movies() {
     localStorage.setItem('shortFilms', JSON.stringify(shortFilms));
   }
 
-  function handleGetAllMovies(moviesList) {
+  function handleGetAllMovies(moviesList: []) {
     setButtonMore(false);
     getAllMovies()
       .then((res) => {
         setMovies(res);
         moviesList === foundMovies ?
-          setFoundMovies(filterMovies(res, value, false)) :
-          setShortFilms(filterMovies(res, value, true));
+          setFoundMovies(filterMovies(res, value, false) as []) :
+          setShortFilms(filterMovies(res, value, true) as []);
       })
       .catch((err) => {
         setErrorFoundMovies(true);
@@ -133,7 +133,7 @@ export default function Movies() {
       })
   }
 
-  function findMovies(checked) {
+  function findMovies(checked: boolean) {
     setButtonDisabled(true);
     if (value === '') {
       setIsValid(false);
@@ -146,8 +146,8 @@ export default function Movies() {
         setButtonDisabled(false);
         setPreloaderEnabled(false);
         checked ?
-          setFoundMovies(filterMovies(movies, value, false)) :
-          setShortFilms(filterMovies(movies, value, true));
+          setFoundMovies(filterMovies(movies, value, false) as []) :
+          setShortFilms(filterMovies(movies, value, true) as []);
       } else {
         checked ?
           handleGetAllMovies(foundMovies) :
@@ -161,12 +161,12 @@ export default function Movies() {
     setCheckedShort(!checkedShort);
   }
 
-  function handleSubmit(evt) {
+  function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     findMovies(!checkedShort);
   }
 
-  function handleNotFoundMovies(shortList, foundList) {
+  function handleNotFoundMovies(shortList: [], foundList: []) {
     if (movies[0]) {
       if (checkedShort) {
         shortList.length === 0 ?

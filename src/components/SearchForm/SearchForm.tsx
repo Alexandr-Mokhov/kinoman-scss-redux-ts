@@ -9,7 +9,7 @@ type PropsType = {
   buttonDisabled: boolean,
   checkedShort: boolean,
   handleChecked: ChangeEventHandler<HTMLInputElement>,
-  checkedShortSaved: boolean,
+  checkedShortSaved?: boolean,
 }
 
 export default function SearchForm({
